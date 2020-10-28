@@ -1,0 +1,31 @@
+From 22b5d4635f79e614693e55d81dce983da953589c Mon Sep 17 00:00:00 2001
+From: Michel Salim <michel@fb.com>
+Date: Mon, 26 Oct 2020 16:30:30 -0700
+Subject: [PATCH] Fix destination for fizz_test_support
+
+Summary: It was hardcoded to go to `${FIZZ_TEST_INSTALL_PREFIX}/lib/` instead of using `${LIB_INSTALL_DIR}`. On systems where `lib64` is used instead of `lib` (e.g. any 64-bit Fedora / RHEL / CentOS architectures) this means `libfizz_test_support.so` is installed into the wrong directory.
+
+Reviewed By: danobi
+
+Differential Revision: D24497254
+
+fbshipit-source-id: b80d816e6e716f7ab1b47992b3ca0df44f0960de
+---
+ fizz/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fizz/CMakeLists.txt b/fizz/CMakeLists.txt
+index 2693e7c3..5a67778a 100644
+--- a/fizz/CMakeLists.txt
++++ b/fizz/CMakeLists.txt
+@@ -333,8 +333,8 @@ target_include_directories(fizz_test_support
+ install(
+   TARGETS fizz_test_support
+   EXPORT fizz-exports
+-  ARCHIVE DESTINATION ${FIZZ_TEST_INSTALL_PREFIX}/lib
+-  LIBRARY DESTINATION ${FIZZ_TEST_INSTALL_PREFIX}/lib
++  ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
++  LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+ )
+ 
+ foreach(dir ${FIZZ_TEST_HEADER_DIRS})
