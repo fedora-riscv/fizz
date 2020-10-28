@@ -18,7 +18,7 @@ Patch1:         https://github.com/facebookincubator/fizz/commit/22b5d4635f79e61
 Patch2:         https://github.com/facebookincubator/fizz/commit/505cbc78dd98f04915220e3d2796bc026f79c066.patch#/fizz-%{version}-allow_overriding_version.patch
 
 # Folly is known not to work on big-endian CPUs
-# will file a proper blocking bug once this is imported
+# https://bugzilla.redhat.com/show_bug.cgi?id=1892152
 ExcludeArch:    s390x
 
 BuildRequires:  cmake
