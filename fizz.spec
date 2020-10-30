@@ -1,8 +1,9 @@
-# shared build links against static folly if both are installed on armv7hl
-%ifarch armv7hl
-%bcond_with static
-%else
+# link issues on some platforms:
+# https://bugzilla.redhat.com/show_bug.cgi?id=1893332
+%ifarch i686 x86_64
 %bcond_without static
+%else
+%bcond_with static
 %endif
 
 # Some tests fail on 32-bit arches
@@ -16,7 +17,7 @@
 
 Name:           fizz
 Version:        2020.10.26.00
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -131,6 +132,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Fri Oct 30 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.10.26.00-3
+- Only enable static subpackage on x86/x86_64 architectures for now (bz #1893332)
+
 * Thu Oct 29 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.10.26.00-2
 - Add static subpackage
 
