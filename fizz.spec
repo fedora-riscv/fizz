@@ -16,16 +16,13 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2020.10.26.00
-Release:        3%{?dist}
+Version:        2020.11.02.00
+Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
 URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/releases/download/v%{version}/fizz-v%{version}.tar.gz
-Patch0:         %{url}/commit/66de2b986f81ee8fc9a8a06661ee78d9f4088094.patch#/%{name}-%{version}-maybe_uninitialized.patch
-Patch1:         %{url}/commit/22b5d4635f79e614693e55d81dce983da953589c.patch#/%{name}-%{version}-fix_fizz_test_support_dest.patch
-Patch2:         %{url}/commit/505cbc78dd98f04915220e3d2796bc026f79c066.patch#/%{name}-%{version}-allow_overriding_version.patch
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -132,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Nov  2 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.02.00-1
+- Update to 2020.11.02.00
+
 * Fri Oct 30 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.10.26.00-3
 - Only enable static subpackage on x86/x86_64 architectures for now (bz #1893332)
 
