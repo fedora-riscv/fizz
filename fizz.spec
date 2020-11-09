@@ -16,7 +16,7 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2020.11.02.00
+Version:        2020.11.09.00
 Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
@@ -129,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Nov  9 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.09.00-1
+- Update to 2020.11.09.00
+
 * Mon Nov  2 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.02.00-1
 - Update to 2020.11.02.00
 
