@@ -16,13 +16,13 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2020.11.09.00
+Version:        2020.11.16.00
 Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
 URL:            https://github.com/facebookincubator/fizz
-Source0:        %{url}/releases/download/v%{version}/fizz-v%{version}.tar.gz
+Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -64,7 +64,7 @@ developing applications that use %{name}.
 
 
 %prep
-%autosetup -c -p1
+%autosetup -p1
 
 
 %build
@@ -129,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Nov 16 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.16.00-1
+- Update to 2020.11.16.00
+
 * Mon Nov  9 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.09.00-1
 - Update to 2020.11.09.00
 
