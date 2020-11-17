@@ -6,23 +6,20 @@
 %bcond_with static
 %endif
 
-# Some tests fail on 32-bit arches
-%ifarch armv7hl i686
-%bcond_with tests
-%else
 %bcond_without tests
-%endif
 
 %global _static_builddir static_build
 
 Name:           fizz
 Version:        2020.11.16.00
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
 URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
+# Fix test failures on 32-bit architectures
+Patch0:         %{name}-fix-typestest-32bit.patch
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -129,6 +126,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Nov 16 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.16.00-2
+- Fix tests on 32-bit architectures
+
 * Mon Nov 16 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.11.16.00-1
 - Update to 2020.11.16.00
 

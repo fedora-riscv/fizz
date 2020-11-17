@@ -1,0 +1,51 @@
+From 775ae08b0cc7df96c96ff21c2ae06d6d60d9d92b Mon Sep 17 00:00:00 2001
+From: Michel Alexandre Salim <michel@michel-slm.name>
+Date: Mon, 16 Nov 2020 16:22:50 -0800
+Subject: [PATCH] TypesTest: disable Write24BitsBufferOverflow test on 32-bit
+ archs
+
+This test fails:
+```
+F1116 16:18:08.078014    67 IOBuf.h:678] Check failed: amount <= tailroom() (4294967295 vs. 4)
+*** Check failure stack trace: ***
+*** Aborted at 1605572288 (Unix time, try 'date -d @1605572288') ***
+*** Signal 6 (SIGABRT) (0x43) received by PID 67 (pthread TID 0xf4e43b80) (linux TID 67) (maybe from PID 67, UID 0) (code: -6), stack trace: ***
+(error retrieving stack trace)
+```
+---
+ fizz/record/test/TypesTest.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/fizz/record/test/TypesTest.cpp b/fizz/record/test/TypesTest.cpp
+index 0b7011b..10eaa5a 100644
+--- a/fizz/record/test/TypesTest.cpp
++++ b/fizz/record/test/TypesTest.cpp
+@@ -6,6 +6,8 @@
+  *  LICENSE file in the root directory of this source tree.
+  */
+ 
++#include <cstdint>
++
+ #include <folly/portability/GMock.h>
+ #include <folly/portability/GTest.h>
+ 
+@@ -52,6 +54,8 @@ TEST(TestTypes, Write24BitsBuffer) {
+   EXPECT_EQ(buf->length() + 3, out->computeChainDataLength());
+ }
+ 
++#if INTPTR_MAX == INT64_MAX
++// this test fails on 32-bit architectures
+ TEST(TestTypes, Write24BitsBufferOverflow) {
+   auto buf = IOBuf::create(std::numeric_limits<uint32_t>::max());
+   buf->append(std::numeric_limits<uint32_t>::max());
+@@ -61,6 +65,7 @@ TEST(TestTypes, Write24BitsBufferOverflow) {
+   EXPECT_THROW(
+       detail::writeBuf<detail::bits24>(buf, appender), std::runtime_error);
+ }
++#endif
+ 
+ TEST(TestTypes, WriteBuf) {
+   auto buf = IOBuf::create(20);
+-- 
+2.28.0
+
