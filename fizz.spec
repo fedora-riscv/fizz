@@ -12,7 +12,7 @@
 
 Name:           fizz
 Version:        2020.12.28.00
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -124,6 +124,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2020.12.28.00-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Tue Dec 29 12:14:58 PST 2020 Michel Alexandre Salim <salimma@fedoraproject.org> - 2020.12.28.00-1
 - Update to 2020.12.28.00
 
