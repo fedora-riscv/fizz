@@ -11,8 +11,8 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2020.12.28.00
-Release:        2%{?dist}
+Version:        2021.01.25.00
+Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -124,6 +124,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Jan 26 17:49:18 PST 2021 Michel Alexandre Salim <salimma@fedoraproject.org> - 2021.01.25.00-1
+- Update to 2021.01.25.00
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2020.12.28.00-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
