@@ -11,7 +11,7 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2021.03.22.00
+Version:        2021.03.29.00
 Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
@@ -124,6 +124,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Mar 29 2021 Michel Alexandre Salim <michel@michel-slm.name> - 2021.03.29.00-1
+- Update to 2021.03.29.00
+
 * Wed Mar 24 2021 Michel Alexandre Salim <michel@michel-slm.name> - 2021.03.22.00-1
 - Update to 2021.03.22.00
 
