@@ -108,6 +108,8 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %files
 %license LICENSE
+%{_bindir}/fizz
+%{_bindir}/fizz-bogoshim
 %{_libdir}/*.so.*
 
 %files devel
