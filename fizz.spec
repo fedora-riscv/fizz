@@ -10,6 +10,9 @@
 
 %global _static_builddir static_build
 
+# Use C++20 standard, required for folly coroutines.
+%global build_cxxflags -std=c++20 %{optflags}
+
 Name:           fizz
 Version:        2021.07.22.00
 Release:        2%{?dist}
@@ -126,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jul 29 2021 Michel Alexandre Salim <salimma@fedoraproject.org> - 2021.07.22.00-3
+- Use C++20 standard, in order to enable C++ coroutines
+
 * Tue Jul 27 2021 Michel Alexandre Salim <salimma@fedoraproject.org> - 2021.07.22.00-2
 - Rebuilt for folly 2021.07.22.00
 
