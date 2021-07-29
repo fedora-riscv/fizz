@@ -15,7 +15,7 @@
 
 Name:           fizz
 Version:        2021.07.22.00
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
