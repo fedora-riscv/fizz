@@ -14,8 +14,8 @@
 %global build_cxxflags -std=c++20 %{optflags}
 
 Name:           fizz
-Version:        2021.07.22.00
-Release:        3%{?dist}
+Version:        2021.08.02.00
+Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -129,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Aug  5 2021 Filipe Brandenburger <filbranden@gmail.com> - 2021.08.02.00-1
+- Update to 2021.08.02.00
+
 * Thu Jul 29 2021 Michel Alexandre Salim <salimma@fedoraproject.org> - 2021.07.22.00-3
 - Use C++20 standard, in order to enable C++ coroutines
 
