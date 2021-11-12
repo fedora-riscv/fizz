@@ -14,8 +14,8 @@
 %global build_cxxflags -std=c++20 %{optflags}
 
 Name:           fizz
-Version:        2021.08.02.00
-Release:        2%{?dist}
+Version:        2021.11.08.00
+Release:        1%{?dist}
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -129,6 +129,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Fri Nov 12 2021 Michel Alexandre Salim <michel@michel-slm.name> - 2021.11.08.00-1
+- Update to 2021.11.08.00
+
 * Tue Sep 14 2021 Sahana Prasad <sahana@redhat.com> - 2021.08.02.00-2
 - Rebuilt with OpenSSL 3.0.0
 
