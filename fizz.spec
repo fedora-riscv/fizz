@@ -22,7 +22,7 @@
 
 Name:           fizz
 Version:        2021.11.15.00
-Release:        1%{?dist}
+Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
@@ -139,6 +139,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+%autochangelog
 * Thu Nov 18 2021 Michel Alexandre Salim <michel@michel-slm.name> - 2021.11.15.00-1
 - Update to 2021.11.15.00
 
