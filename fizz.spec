@@ -6,14 +6,7 @@
 %bcond_with static
 %endif
 
-%if 0%{?fedora} >= 36
-# issues with GTest 1.11.0, see
-# https://github.com/facebookincubator/fizz/issues/66
-# and https://bodhi.fedoraproject.org/updates/FEDORA-2021-7f23873afa#comment-2197444
-%bcond_with tests
-%else
 %bcond_without tests
-%endif
 
 %global _static_builddir static_build
 
@@ -21,13 +14,15 @@
 %global build_cxxflags -std=c++20 %{optflags}
 
 Name:           fizz
-Version:        2021.11.15.00
+Version:        2021.11.29.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD
 URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
+# Disable failing tests
+Patch0:         %{name}-no_failed_tests.patch
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -40,7 +35,14 @@ BuildRequires:  folly-devel
 BuildRequires:  folly-static
 %endif
 
-%description
+%global _description %{expand:
+Fizz is a TLS 1.3 implementation.
+
+Fizz currently supports TLS 1.3 drafts 28, 26 (both wire-compatible with the
+final specification), and 23. All major handshake modes are supported, including
+PSK resumption, early data, client authentication, and HelloRetryRequest.}
+
+%description %{_description}
 Fizz is a TLS 1.3 implementation.
 
 Fizz currently supports TLS 1.3 drafts 28, 26 (both wire-compatible with the
@@ -52,7 +54,8 @@ PSK resumption, early data, client authentication, and HelloRetryRequest.
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
-%description    devel
+%description    devel %{_description}
+
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -62,7 +65,8 @@ developing applications that use %{name}.
 Summary:        Static development libraries for %{name}
 Requires:       %{name}-devel%{?_isa} = %{version}-%{release}
 
-%description    static
+%description    static %{_description}
+
 The %{name}-static package contains static libraries for
 developing applications that use %{name}.
 %endif

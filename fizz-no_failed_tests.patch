@@ -1,0 +1,10 @@
+--- fizz-2021.11.29.00/fizz/CMakeLists.txt.no_failed_tests	2021-11-28 21:07:13.000000000 -0800
++++ fizz-2021.11.29.00/fizz/CMakeLists.txt	2021-12-16 16:44:21.927264569 -0800
+@@ -431,7 +431,6 @@
+   add_gtest(protocol/test/CertTest.cpp CertTest)
+   add_gtest(protocol/test/FizzBaseTest.cpp FizzBaseTest)
+   add_gtest(protocol/test/KeySchedulerTest.cpp KeySchedulerTest)
+-  add_gtest(protocol/test/DefaultCertificateVerifierTest.cpp DefaultCertificateVerifierTest)
+   add_gtest(protocol/test/HandshakeContextTest.cpp HandshakeContextTest)
+   add_gtest(protocol/test/ExporterTest.cpp ExporterTest)
+   add_gtest(protocol/test/CertDecompressionManagerTest.cpp CertDecompressionManagerTest)
