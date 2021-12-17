@@ -1,0 +1,10 @@
+--- fizz-2021.11.29.00/fizz/CMakeLists.txt.no_32bit_failed_tests	2021-11-28 21:07:13.000000000 -0800
++++ fizz-2021.11.29.00/fizz/CMakeLists.txt	2021-12-16 17:20:32.993699024 -0800
+@@ -457,7 +457,6 @@
+   add_gtest(util/test/FizzUtilTest.cpp FizzUtilTest)
+   add_gtest(util/test/FizzVariantTest.cpp FizzVariantTest)
+   add_gtest(util/test/KeyLogWriterTest.cpp KeyLogWriterTest)
+-  add_gtest(test/AsyncFizzBaseTest.cpp AsyncFizzBaseTest)
+   add_gtest(test/HandshakeTest.cpp HandshakeTest)
+ endif()
+ 

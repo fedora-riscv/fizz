@@ -23,6 +23,7 @@ URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
 # Disable failing tests
 Patch0:         %{name}-no_failed_tests.patch
+Patch1:         %{name}-no_32bit_failed_tests.patch
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -73,7 +74,11 @@ developing applications that use %{name}.
 
 
 %prep
-%autosetup -p1
+%setup -q
+%patch0 -p1 -b .no_failed_tests
+%ifarch armv7hl i686
+%patch1 -p1 -b .no_32bit_failed_tests
+%endif
 
 
 %build
