@@ -10,9 +10,6 @@
 
 %global _static_builddir static_build
 
-# Use C++20 standard, required for folly coroutines.
-%global build_cxxflags -std=c++20 %{optflags}
-
 Name:           fizz
 Version:        2021.11.29.00
 Release:        %autorelease
@@ -34,6 +31,10 @@ BuildRequires:  gcc-c++
 BuildRequires:  folly-devel
 %if %{with static}
 BuildRequires:  folly-static
+%endif
+%if %{with tests}
+BuildRequires:  gmock-devel
+BuildRequires:  gtest-devel
 %endif
 
 %global _description %{expand:
