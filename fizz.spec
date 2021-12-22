@@ -7,6 +7,13 @@
 %endif
 
 %bcond_without tests
+%if 0%{?el8}
+%ifarch ppc64le
+# tests often stall after this
+# 64/66 Test #60: SlidingBloomReplayCacheTest 
+%bcond_with tests
+%endif
+%endif
 
 %global _static_builddir static_build
 
