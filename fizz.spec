@@ -21,7 +21,7 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2021.12.20.00
+Version:        2022.01.17.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
