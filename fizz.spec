@@ -12,7 +12,9 @@
 # 64/66 Test #60: SlidingBloomReplayCacheTest 
 %bcond_with tests
 %else
-%bcond_without tests
+# tests don't currently compile with el8's gmock
+# error: use of deleted function
+%bcond_with tests
 %endif
 %else
 %bcond_without tests
@@ -21,7 +23,7 @@
 %global _static_builddir static_build
 
 Name:           fizz
-Version:        2022.01.17.00
+Version:        2022.02.21.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
@@ -38,9 +40,9 @@ ExcludeArch:    s390x
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  folly-devel
+BuildRequires:  folly-devel = %{version}
 %if %{with static}
-BuildRequires:  folly-static
+BuildRequires:  folly-static = %{version}
 %endif
 %if %{with tests}
 BuildRequires:  gmock-devel
