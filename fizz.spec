@@ -1,3 +1,10 @@
+%if 0%{?fedora} >= 36
+# Folly is compiled with Clang
+%bcond_without toolchain_clang
+%else
+%bcond_with toolchain_clang
+%endif
+
 %if 0%{?el8}
 %ifarch ppc64le
 # tests often stall after this
@@ -29,9 +36,17 @@ Patch2:         %{name}-make_version_consistent.patch
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
 ExcludeArch:    s390x
+%if 0%{?fedora} >= 36
+# fmt code breaks: https://bugzilla.redhat.com/show_bug.cgi?id=2061022
+ExcludeArch:    ppc64le
+%endif
 
 BuildRequires:  cmake
+%if %{with toolchain_clang}
+BuildRequires:  clang
+%else
 BuildRequires:  gcc-c++
+%endif
 BuildRequires:  folly-devel = %{version}
 %if %{with check}
 BuildRequires:  gmock-devel
@@ -74,7 +89,8 @@ developing applications that use %{name}.
 
 
 %build
-%cmake fizz \
+cd fizz
+%cmake \
 %if %{without tests}
   -DBUILD_TESTS=OFF \
 %endif
@@ -83,17 +99,20 @@ developing applications that use %{name}.
   -DPACKAGE_VERSION=%{version} \
   -DSO_VERSION=%{version}
 %cmake_build
+cd -
 
 
 %install
+cd fizz
 %cmake_install
-
-# find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
+cd -
 
 
 %if %{with check}
 %check
+cd fizz
 %ctest
+cd -
 %endif
 
 
