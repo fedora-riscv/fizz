@@ -5,6 +5,10 @@
 %bcond_with toolchain_clang
 %endif
 
+%if %{with toolchain_clang}
+%global toolchain clang
+%endif
+
 %if 0%{?el8}
 %ifarch ppc64le
 # tests often stall after this
