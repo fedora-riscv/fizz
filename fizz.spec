@@ -24,7 +24,7 @@
 %endif
 
 Name:           fizz
-Version:        2022.02.28.00
+Version:        2022.03.07.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
@@ -34,8 +34,6 @@ Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
 # Disable failing tests
 Patch0:         %{name}-no_failed_tests.patch
 Patch1:         %{name}-no_32bit_failed_tests.patch
-# SO_VERSION strips extra zeros
-Patch2:         %{name}-make_version_consistent.patch
 
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
@@ -89,7 +87,6 @@ developing applications that use %{name}.
 %ifarch armv7hl i686
 %patch1 -p1 -b .no_32bit_failed_tests
 %endif
-%patch2 -p1
 
 
 %build
