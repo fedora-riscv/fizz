@@ -24,7 +24,7 @@
 %endif
 
 Name:           fizz
-Version:        2022.03.07.00
+Version:        2022.03.14.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
