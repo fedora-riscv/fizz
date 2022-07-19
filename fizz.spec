@@ -1,9 +1,7 @@
-%if 0%{?fedora} == 36
-# Folly is compiled with Clang
-%bcond_without toolchain_clang
-%else
 %bcond_with toolchain_clang
-%endif
+
+# use this to re-test running all tests
+%bcond_with all_tests
 
 %if %{with toolchain_clang}
 %global toolchain clang
@@ -24,7 +22,7 @@
 %endif
 
 Name:           fizz
-Version:        2022.03.14.00
+Version:        2022.07.11.00
 Release:        %autorelease
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
@@ -33,15 +31,8 @@ URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
 # Disable failing tests
 Patch0:         %{name}-no_failed_tests.patch
-Patch1:         %{name}-no_32bit_failed_tests.patch
 
-# Folly is known not to work on big-endian CPUs
-# https://bugzilla.redhat.com/show_bug.cgi?id=1892152
-ExcludeArch:    s390x
-%if 0%{?fedora} == 36
-# fmt code breaks: https://bugzilla.redhat.com/show_bug.cgi?id=2061022
-ExcludeArch:    ppc64le
-%endif
+ExclusiveArch:  x86_64 aarch64 ppc64le
 
 BuildRequires:  cmake
 %if %{with toolchain_clang}
@@ -83,9 +74,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
+%if %{without all_tests}
 %patch0 -p1 -b .no_failed_tests
-%ifarch armv7hl i686
-%patch1 -p1 -b .no_32bit_failed_tests
 %endif
 
 
