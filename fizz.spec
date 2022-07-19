@@ -1,4 +1,4 @@
-%if 0%{?fedora} >= 36
+%if 0%{?fedora} == 36
 # Folly is compiled with Clang
 %bcond_without toolchain_clang
 %else
@@ -38,7 +38,7 @@ Patch1:         %{name}-no_32bit_failed_tests.patch
 # Folly is known not to work on big-endian CPUs
 # https://bugzilla.redhat.com/show_bug.cgi?id=1892152
 ExcludeArch:    s390x
-%if 0%{?fedora} >= 36
+%if 0%{?fedora} == 36
 # fmt code breaks: https://bugzilla.redhat.com/show_bug.cgi?id=2061022
 ExcludeArch:    ppc64le
 %endif
