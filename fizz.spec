@@ -20,14 +20,14 @@
 
 Name:           fizz
 Version:        2023.10.16.00
-Release:        %autorelease
+Release:        %autorelease -e rv64
 Summary:        A C++14 implementation of the TLS-1.3 standard
 
 License:        BSD-3-Clause
 URL:            https://github.com/facebookincubator/fizz
 Source0:        %{url}/archive/v%{version}/fizz-%{version}.tar.gz
 
-ExclusiveArch:  x86_64 aarch64 ppc64le
+ExclusiveArch:  x86_64 aarch64 ppc64le riscv64
 
 BuildRequires:  cmake
 %if %{with toolchain_clang}
